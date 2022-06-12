@@ -32,9 +32,9 @@ class C(BaseConstants):
     MATCH_DURATION = np.random.geometric(
         p=(1 - DELTA), size=NUM_MATCHES
     )  # the first argument here is the probability the match ends after each round (i.e., 1 - \DELTA); the second argument is the number of matches. For documentation, see: https://docs.scipy.org/doc/numpy-1.14.1/reference/generated/numpy.random.geometric.html
-    NUM_ROUNDS = np.sum(MATCH_DURATION)
+    NUM_ROUNDS = int(np.sum(MATCH_DURATION))
     LAST_ROUNDS = np.cumsum(MATCH_DURATION)
-    LAST_ROUND = LAST_ROUNDS[-1]
+    LAST_ROUND = int(LAST_ROUNDS[-1])
     FIRST_ROUNDS = [1]
     for k in range(1, len(MATCH_DURATION)):
         FIRST_ROUNDS.append(int(LAST_ROUNDS[k - 1] + 1))
@@ -60,8 +60,8 @@ class Player(BasePlayer):
 # FUNCTIONS
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
-        subsession.session.vars['start_time'] = time.time()
-        subsession.session.vars['alive'] = True
+        subsession.session.start_time = time.time()
+        subsession.session.alive = True
     k = 0
     while k < len(C.LAST_ROUNDS):
         if subsession.round_number <= C.LAST_ROUNDS[k]:
@@ -78,7 +78,7 @@ def creating_session(subsession: Subsession):
         subsession.group_like_round(subsession.round_number - 1)
 
 
-def other_player(player: Player):
+def other_player(player: Player) -> Player:
     return player.get_others_in_group()[0]
 
 
@@ -88,7 +88,10 @@ def set_payoff(player: Player):
             'Action 1': C.BOTH_COOPERATE_PAYOFF,
             'Action 2': C.BETRAYED_PAYOFF,
         },
-        'Action 2': {'Action 1': C.BETRAY_PAYOFF, 'Action 2': C.BOTH_DEFECT_PAYOFF},
+        'Action 2': {
+            'Action 1': C.BETRAY_PAYOFF,
+            'Action 2': C.BOTH_DEFECT_PAYOFF
+        },
     }
     player.payoff = payoff_matrix[player.decision][other_player(player).decision]
 
@@ -141,14 +144,14 @@ class ResultsWaitPage(WaitPage):
     @staticmethod
     def after_all_players_arrive(group: Group):
         for p in group.get_players():
-            p.set_payoff()
+            set_payoff(p)
 
 
 class Results(Page):
     @staticmethod
     def vars_for_template(player: Player):
         me = player
-        opponent = me.other_player()
+        opponent = other_player(me)
         return {
             'my_decision': me.decision,
             'opponent_decision': opponent.decision,
@@ -176,23 +179,30 @@ class EndRound(Page):
             die_threshold_plus_one=continuation_chance + 1,
         )
 
+
+class EndWaitPage(WaitPage):
+    wait_for_all_groups = True
+
     @staticmethod
-    def after_all_players_arrive(player: Player):
-        elapsed_time = time.time() - player.session.vars['start_time']
+    def after_all_players_arrive(subsession: Subsession):
+        elapsed_time = time.time() - subsession.session.start_time
         if (
             C.TIME_LIMIT == True
-            and elapsed_time > C.TIME_LIMIT_SECONDS
-            and player.subsession.round_number in C.LAST_ROUNDS
+            and
+            elapsed_time > C.TIME_LIMIT_SECONDS
+            and
+            subsession.round_number in C.LAST_ROUNDS
         ):
-            player.session.vars['alive'] = False
+            subsession.session.alive = False
 
 
 class End(Page):
     @staticmethod
     def is_displayed(player: Player):
         return (
-            player.session.vars['alive'] == False
-            or player.subsession.round_number == C.LAST_ROUND
+            player.session.alive == False
+            or
+            player.subsession.round_number == C.LAST_ROUND
         )
 
 
@@ -205,5 +215,6 @@ page_sequence = [
     ResultsWaitPage,
     Results,
     EndRound,
+    EndWaitPage,
     End,
 ]

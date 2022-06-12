@@ -22,6 +22,12 @@ SESSION_CONFIGS = [
 # see the end of this file for the inactive session configs
 
 
+SESSION_FIELDS = [
+    'start_time',
+    'alive'
+]
+
+
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
 LANGUAGE_CODE = 'en'
@@ -31,51 +37,10 @@ REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
 ROOMS = [
-dict(
-    name='Prolific_1',
-    display_name='Prolific_1',
-    use_secure_urls=False
-),
-dict(
-    name='Prolific_2',
-    display_name='Prolific_2',
-    use_secure_urls=False
-),
-dict(
-    name='Prolific_3',
-    display_name='Prolific_3',
-    use_secure_urls=False
-),
-dict(
-    name='SONA_1',
-    display_name='SONA_1',
-    use_secure_urls=False
-),
-dict(
-    name='SONA_2',
-    display_name='SONA_2',
-    use_secure_urls=False
-),
-dict(
-    name='SONA_3',
-    display_name='SONA_3',
-    use_secure_urls=False
-),
-dict(
-    name='BELSS',
-    display_name='BELSS',
-    participant_label_file='_rooms/belss.txt',
-    use_secure_urls=True
-),
-dict(
-    name='30463',
-    display_name='Intro to Cognitive Science',
-    use_secure_urls=False
-),
-dict(
-    name='live_demo',
-    display_name='Room for Live Demo (No Participant Labels)',
-)
+    dict(
+        name='live_demo',
+        display_name='Room for Live Demo (No Participant Labels)',
+    )
 ]
 
 ADMIN_USERNAME = 'admin'
@@ -83,140 +48,10 @@ ADMIN_USERNAME = 'admin'
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 
-DEMO_PAGE_INTRO_HTML = """
-Here are some oTree games.
-"""
+DEMO_PAGE_INTRO_HTML = """ """
 
 # don't share this with anybody.
 SECRET_KEY = '2_1xpevqi65$0e$w4=)@izbb*pu3jo^z)rca1hfsqg@p3gnmah'
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = ['otree']
-
-# inactive session configs
-### {
-###     'name': 'trust',
-###     'display_name': "Trust Game",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['trust', 'payment_info'],
-### },
-### {
-###     'name': 'prisoner',
-###     'display_name': "Prisoner's Dilemma",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['prisoner', 'payment_info'],
-### },
-### {
-###     'name': 'ultimatum',
-###     'display_name': "Ultimatum (randomized: strategy vs. direct response)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['ultimatum', 'payment_info'],
-### },
-### {
-###     'name': 'ultimatum_strategy',
-###     'display_name': "Ultimatum (strategy method treatment)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['ultimatum', 'payment_info'],
-###     'use_strategy_method': True,
-### },
-### {
-###     'name': 'ultimatum_non_strategy',
-###     'display_name': "Ultimatum (direct response treatment)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['ultimatum', 'payment_info'],
-###     'use_strategy_method': False,
-### },
-### {
-###     'name': 'vickrey_auction',
-###     'display_name': "Vickrey Auction",
-###     'num_demo_participants': 3,
-###     'app_sequence': ['vickrey_auction', 'payment_info'],
-### },
-### {
-###     'name': 'volunteer_dilemma',
-###     'display_name': "Volunteer's Dilemma",
-###     'num_demo_participants': 3,
-###     'app_sequence': ['volunteer_dilemma', 'payment_info'],
-### },
-### {
-###     'name': 'cournot',
-###     'display_name': "Cournot Competition",
-###     'num_demo_participants': 2,
-###     'app_sequence': [
-###         'cournot', 'payment_info'
-###     ],
-### },
-### {
-###     'name': 'principal_agent',
-###     'display_name': "Principal Agent",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['principal_agent', 'payment_info'],
-### },
-### {
-###     'name': 'dictator',
-###     'display_name': "Dictator Game",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['dictator', 'payment_info'],
-### },
-### {
-###     'name': 'matching_pennies',
-###     'display_name': "Matching Pennies",
-###     'num_demo_participants': 2,
-###     'app_sequence': [
-###         'matching_pennies',
-###     ],
-### },
-### {
-###     'name': 'traveler_dilemma',
-###     'display_name': "Traveler's Dilemma",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['traveler_dilemma', 'payment_info'],
-### },
-### {
-###     'name': 'bargaining',
-###     'display_name': "Bargaining Game",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['bargaining', 'payment_info'],
-### },
-### {
-###     'name': 'common_value_auction',
-###     'display_name': "Common Value Auction",
-###     'num_demo_participants': 3,
-###     'app_sequence': ['common_value_auction', 'payment_info'],
-### },
-### {
-###     'name': 'bertrand',
-###     'display_name': "Bertrand Competition",
-###     'num_demo_participants': 2,
-###     'app_sequence': [
-###         'bertrand', 'payment_info'
-###     ],
-### },
-### {
-###     'name': 'real_effort',
-###     'display_name': "Real-effort transcription task",
-###     'num_demo_participants': 1,
-###     'app_sequence': [
-###         'real_effort',
-###     ],
-### },
-### {
-###     'name': 'lemon_market',
-###     'display_name': "Lemon Market Game",
-###     'num_demo_participants': 3,
-###     'app_sequence': [
-###         'lemon_market', 'payment_info'
-###     ],
-### },
-### {
-###     'name': 'public_goods_simple',
-###     'display_name': "Public Goods (simple version from tutorial)",
-###     'num_demo_participants': 3,
-###     'app_sequence': ['public_goods_simple', 'payment_info'],
-### },
-### {
-###     'name': 'trust_simple',
-###     'display_name': "Trust Game (simple version from tutorial)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['trust_simple'],
-### },
