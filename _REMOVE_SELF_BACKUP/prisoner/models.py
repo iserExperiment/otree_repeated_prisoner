@@ -53,16 +53,16 @@ class Subsession(BaseSubsession):
             self.session.vars['alive'] = True
 
         k = 0
-        while k < len(Constants.last_rounds):
-            if self.round_number <= Constants.last_rounds[k]:
+        while k < len(C.LAST_ROUNDS):
+            if self.round_number <= C.LAST_ROUNDS[k]:
                 self.match_number = k + 1
-                k = len(Constants.last_rounds)
+                k = len(C.LAST_ROUNDS)
             else:
                 k += 1
 
-        self.round_in_match_number = self.round_number - Constants.first_rounds[self.match_number-1] + 1
+        self.round_in_match_number = self.round_number - C.FIRST_ROUNDS[self.match_number-1] + 1
 
-        if self.round_number in Constants.first_rounds:
+        if self.round_number in C.FIRST_ROUNDS:
             self.group_randomly()
         else:
             self.group_like_round(self.round_number-1)
@@ -86,13 +86,13 @@ class Player(BasePlayer):
         payoff_matrix = {
             'Action 1':
                 {
-                    'Action 1': Constants.both_cooperate_payoff,
-                    'Action 2': Constants.betrayed_payoff
+                    'Action 1': C.BOTH_COOPERATE_PAYOFF,
+                    'Action 2': C.BETRAYED_PAYOFF
                 },
             'Action 2':
                 {
-                    'Action 1': Constants.betray_payoff,
-                    'Action 2': Constants.both_defect_payoff
+                    'Action 1': C.BETRAY_PAYOFF,
+                    'Action 2': C.BOTH_DEFECT_PAYOFF
                 }
         }
 

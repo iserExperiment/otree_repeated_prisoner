@@ -1,0 +1,125 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Match {{ subsession.match_number }}, Round {{ subsession.round_in_match_number }} &#8211; Results
+{% endblock %}
+
+{% block content %}
+
+{% if both_cooperate %}
+    <table class='table table-bordered text-center'
+           style='width: auto; margin: auto'>
+        <tr>
+            <th colspan=2 rowspan=2></th>
+            <th colspan=2>The Other Participant</th>
+        </tr>
+        <tr>
+            <th>Action 1</th>
+            <th>Action 2</th>
+        </tr>
+        <tr>
+            <th rowspan=2><span class="rotate90">You</span></th>
+            <th>Action 1</th>
+            <td bgcolor="#FFFF00">{{ C.BOTH_COOPERATE_PAYOFF }}, {{ C.BOTH_COOPERATE_PAYOFF }}</td>
+            <td>0, {{ C.BETRAY_PAYOFF }}</td>
+        </tr>
+        <tr>
+            <th>Action 2</th>
+            <td>{{ C.BETRAY_PAYOFF }}, 0</td>
+            <td>{{ C.BOTH_DEFECT_PAYOFF }}, {{ C.BOTH_DEFECT_PAYOFF }}</td>
+        </tr>
+    </table>
+
+{% elif both_defect %}
+    <table class='table table-bordered text-center'
+           style='width: auto; margin: auto'>
+        <tr>
+            <th colspan=2 rowspan=2></th>
+            <th colspan=2>The Other Participant</th>
+        </tr>
+        <tr>
+            <th>Action 1</th>
+            <th>Action 2</th>
+        </tr>
+        <tr>
+            <th rowspan=2><span class="rotate90">You</span></th>
+            <th>Action 1</th>
+            <td>{{ C.BOTH_COOPERATE_PAYOFF }}, {{ C.BOTH_COOPERATE_PAYOFF }}</td>
+            <td>0, {{ C.BETRAY_PAYOFF }}</td>
+        </tr>
+        <tr>
+            <th>Action 2</th>
+            <td>{{ C.BETRAY_PAYOFF }}, 0</td>
+            <td bgcolor="#FFFF00">{{ C.BOTH_DEFECT_PAYOFF }}, {{ C.BOTH_DEFECT_PAYOFF }}</td>
+        </tr>
+    </table>
+
+{% elif i_cooperate_he_defects %}
+    <table class='table table-bordered text-center'
+           style='width: auto; margin: auto'>
+        <tr>
+            <th colspan=2 rowspan=2></th>
+            <th colspan=2>The Other Participant</th>
+        </tr>
+        <tr>
+            <th>Action 1</th>
+            <th>Action 2</th>
+        </tr>
+        <tr>
+            <th rowspan=2><span class="rotate90">You</span></th>
+            <th>Action 1</th>
+            <td>{{ C.BOTH_COOPERATE_PAYOFF }}, {{ C.BOTH_COOPERATE_PAYOFF }}</td>
+            <td bgcolor="#FFFF00">0, {{ C.BETRAY_PAYOFF }}</td>
+        </tr>
+        <tr>
+            <th>Action 2</th>
+            <td>{{ C.BETRAY_PAYOFF }}, 0</td>
+            <td>{{ C.BOTH_DEFECT_PAYOFF }}, {{ C.BOTH_DEFECT_PAYOFF }}</td>
+        </tr>
+    </table>
+
+{% else %}
+    <table class='table table-bordered text-center'
+           style='width: auto; margin: auto'>
+        <tr>
+            <th colspan=2 rowspan=2></th>
+            <th colspan=2>The Other Participant</th>
+        </tr>
+        <tr>
+            <th>Action 1</th>
+            <th>Action 2</th>
+        </tr>
+        <tr>
+            <th rowspan=2><span class="rotate90">You</span></th>
+            <th>Action 1</th>
+            <td>{{ C.BOTH_COOPERATE_PAYOFF }}, {{ C.BOTH_COOPERATE_PAYOFF }}</td>
+            <td>0, {{ C.BETRAY_PAYOFF }}</td>
+        </tr>
+        <tr>
+            <th>Action 2</th>
+            <td bgcolor="#FFFF00">{{ C.BETRAY_PAYOFF }}, 0</td>
+            <td>{{ C.BOTH_DEFECT_PAYOFF }}, {{ C.BOTH_DEFECT_PAYOFF }}</td>
+        </tr>
+    </table>
+
+{% endif %}
+    <p>
+        {% if same_choice %}
+            Both of you chose {{ my_decision }}.
+        {% else %}
+            You chose {{ my_decision }} and the other participant chose {{ opponent_decision }}.
+        {% endif %}
+    </p>
+
+    <p>
+        As a result, you earned {{ player.payoff }}.
+    </p>
+
+    {% next_button %}
+
+<!--
+    {% include C.INSTRUCTIONS_TEMPLATE %}
+-->
+
+{% endblock %}

@@ -14,7 +14,7 @@ class Instructions_1(Page):
 class Instructions_2(Page):
 
     def vars_for_template(self):
-        continuation_chance = int(round(Constants.delta * 100))
+        continuation_chance = int(round(C.DELTA * 100))
         return dict(continuation_chance=continuation_chance, die_threshold_plus_one=continuation_chance+1,)
 
     def is_displayed(self):
@@ -22,7 +22,7 @@ class Instructions_2(Page):
 
 class Instructions_3(Page):
     def vars_for_template(self):
-        continuation_chance = int(round(Constants.delta * 100))
+        continuation_chance = int(round(C.DELTA * 100))
         return dict(continuation_chance=continuation_chance, die_threshold_plus_one=continuation_chance+1,)
 
     def is_displayed(self):
@@ -56,8 +56,8 @@ class Results(Page):
 class EndRound(Page):
     timeout_seconds = 100
     def vars_for_template(self):
-        continuation_chance = int(round(Constants.delta * 100))
-        if self.subsession.round_number in Constants.last_rounds:
+        continuation_chance = int(round(C.DELTA * 100))
+        if self.subsession.round_number in C.LAST_ROUNDS:
             dieroll = random.randint(continuation_chance+1, 100)
         else:
             dieroll =  random.randint(1, continuation_chance)
@@ -65,12 +65,12 @@ class EndRound(Page):
 
     def after_all_players_arrive(self):
         elapsed_time = time.time() - self.session.vars['start_time']
-        if Constants.time_limit == True and elapsed_time > Constants.time_limit_seconds and self.subsession.round_number in Constants.last_rounds:
+        if C.TIME_LIMIT == True and elapsed_time > C.TIME_LIMIT_SECONDS and self.subsession.round_number in C.LAST_ROUNDS:
             self.session.vars['alive'] = False
 
 class End(Page):
     def is_displayed(self):
-        return self.session.vars['alive'] == False or self.subsession.round_number == Constants.last_round
+        return self.session.vars['alive'] == False or self.subsession.round_number == C.LAST_ROUND
 
 page_sequence = [
     #Introduction,
