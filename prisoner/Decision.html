@@ -1,21 +1,9 @@
 {% extends "global/Page.html" %}
-{% load otree %}
 
 {% block title %}
     Match {{ subsession.match_number }}, Round {{ subsession.round_in_match_number }} &#8211; Make Your Choice!
 {% endblock %}
 
-{% block styles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
-
-    <style>
-        .highlight-row-on-hover:hover td {
-            background-color: #fcf8e3;
-        }
-
-    </style>
-
-{% endblock %}
 
 {% block content %}
 
@@ -43,5 +31,18 @@
         </table>
     </div>
 
+
+{% endblock %}
+
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+
+    <style>
+        .highlight-row-on-hover:hover td {
+            background-color: #fcf8e3;
+        }
+
+    </style>
 
 {% endblock %}

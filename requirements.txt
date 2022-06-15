@@ -1,4 +1,4 @@
-otree==3.3.11
-psycopg2>=2.8.4
-numpy==1.20.2
-sentry-sdk==0.7.9
+otree==5.8.4
+psycopg2
+numpy
+sentry-sdk
