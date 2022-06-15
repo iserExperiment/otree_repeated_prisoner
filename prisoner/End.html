@@ -6,30 +6,30 @@
 
 {% block content %}
 
-{% if subsession.round_number == C.LAST_ROUND %}
+    {% if subsession.round_number == C.LAST_ROUND %}
 
-<p>This ends match {{C.NUM_MATCHES}} and, thus, ends the experiment.</p>
+        <p>This ends match {{C.NUM_MATCHES}} and, thus, ends the experiment.</p>
 
-<p>We will start payments shortly. Please wait quietly at your seat until the experimenter calls your computer station number.</p>
+        <p>We will start payments shortly. Please wait quietly at your seat until the experimenter calls your computer station number.</p>
 
-<p>Thank you very much for your participation!</p>
+        <p>Thank you very much for your participation!</p>
 
-{% else %}
+    {% else %}
 
-<p>This is the first match to end after 1 hour of play. Thus, this is the end of the experiment.</p>
+        <p>This is the first match to end after 1 hour of play. Thus, this is the end of the experiment.</p>
 
-<p>We will start payments shortly. Please wait quietly at your seat until the experimenter calls your computer station number.</p>
+        <p>We will start payments shortly. Please wait quietly at your seat until the experimenter calls your computer station number.</p>
 
-<p>Thank you very much for your participation!</p>
+        <p>Thank you very much for your participation!</p>
 
-{% endif %}
+    {% endif %}
 
 {% endblock %}
 
 {% block styles %}
     <style>
-.otree-timer {
-    display: none;
-}
+        .otree-timer {
+            display: none;
+        }
     </style>
 {% endblock %}

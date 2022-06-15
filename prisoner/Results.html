@@ -7,7 +7,7 @@
 {% block content %}
 
 {% if both_cooperate %}
-        <table class='table table-bordered text-center' style='width: auto; margin: auto'>
+    <table class='table table-bordered text-center' style='width: auto; margin: auto'>
         <tr>
             <th colspan=2 rowspan=2></th>
             <th colspan=2>The Other Participant</th>
@@ -19,7 +19,7 @@
         <tr>
             <th rowspan=2><span class="rotate90">You</span></th>
             <th>Action 1</th>
-                <td style="background-color: #FFFF00 !important;">{{ C.BOTH_COOPERATE_PAYOFF }}, {{ C.BOTH_COOPERATE_PAYOFF }}</td>
+            <td style="background-color: #FFFF00 !important;">{{ C.BOTH_COOPERATE_PAYOFF }}, {{ C.BOTH_COOPERATE_PAYOFF }}</td>
             <td>0, {{ C.BETRAY_PAYOFF }}</td>
         </tr>
         <tr>
@@ -30,7 +30,7 @@
     </table>
 
 {% elif both_defect %}
-        <table class='table table-bordered text-center' style='width: auto; margin: auto'>
+    <table class='table table-bordered text-center' style='width: auto; margin: auto'>
         <tr>
             <th colspan=2 rowspan=2></th>
             <th colspan=2>The Other Participant</th>
@@ -48,12 +48,12 @@
         <tr>
             <th>Action 2</th>
             <td>{{ C.BETRAY_PAYOFF }}, 0</td>
-                <td style="background-color: #FFFF00 !important;">{{ C.BOTH_DEFECT_PAYOFF }}, {{ C.BOTH_DEFECT_PAYOFF }}</td>
+            <td style="background-color: #FFFF00 !important;">{{ C.BOTH_DEFECT_PAYOFF }}, {{ C.BOTH_DEFECT_PAYOFF }}</td>
         </tr>
     </table>
 
 {% elif i_cooperate_he_defects %}
-        <table class='table table-bordered text-center' style='width: auto; margin: auto'>
+    <table class='table table-bordered text-center' style='width: auto; margin: auto'>
         <tr>
             <th colspan=2 rowspan=2></th>
             <th colspan=2>The Other Participant</th>
@@ -66,7 +66,7 @@
             <th rowspan=2><span class="rotate90">You</span></th>
             <th>Action 1</th>
             <td>{{ C.BOTH_COOPERATE_PAYOFF }}, {{ C.BOTH_COOPERATE_PAYOFF }}</td>
-                <td style="background-color: #FFFF00 !important;">0, {{ C.BETRAY_PAYOFF }}</td>
+            <td style="background-color: #FFFF00 !important;">0, {{ C.BETRAY_PAYOFF }}</td>
         </tr>
         <tr>
             <th>Action 2</th>
@@ -76,7 +76,7 @@
     </table>
 
 {% else %}
-        <table class='table table-bordered text-center' style='width: auto; margin: auto'>
+    <table class='table table-bordered text-center' style='width: auto; margin: auto'>
         <tr>
             <th colspan=2 rowspan=2></th>
             <th colspan=2>The Other Participant</th>
@@ -93,7 +93,7 @@
         </tr>
         <tr>
             <th>Action 2</th>
-                <td style="background-color: #FFFF00 !important;">{{ C.BETRAY_PAYOFF }}, 0</td>
+            <td style="background-color: #FFFF00 !important;">{{ C.BETRAY_PAYOFF }}, 0</td>
             <td>{{ C.BOTH_DEFECT_PAYOFF }}, {{ C.BOTH_DEFECT_PAYOFF }}</td>
         </tr>
     </table>
