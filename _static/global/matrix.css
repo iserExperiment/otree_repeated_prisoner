@@ -5,5 +5,5 @@
     -o-transform: rotate(-90deg);
     transform: rotate(-90deg);
     float: left;
-    margin-top: 1em; // TODO: do not hardcode to center align
+    margin-top: 1em;    /* TODO: do not hardcode to center align */
 }
