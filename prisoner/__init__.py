@@ -1,7 +1,7 @@
 import random
 import time
-
 import numpy as np
+
 from otree.api import *
 
 
@@ -19,8 +19,8 @@ class C(BaseConstants):
 
     INSTRUCTIONS_TEMPLATE = 'prisoner/instructions.html'
 
-    TIME_LIMIT = False
-    TIME_LIMIT_SECONDS = 3600  # time limit for session (in seconds) since first round of first match (3600 in Dal Bo and Frechette AER 2011)
+    TIME_LIMIT = True
+    TIME_LIMIT_SECONDS = 60 * 3  # time limit for session (in seconds) since first round of first match (3600 in Dal Bo and Frechette AER 2011)
 
     # payoff if 1 player defects and the other cooperates""",
     BETRAY_PAYOFF = 50
@@ -30,8 +30,8 @@ class C(BaseConstants):
     BOTH_COOPERATE_PAYOFF = 32  # one of two treatments in Dal Bo & Frechette AER 2011; values: 32, 40, 48
     BOTH_DEFECT_PAYOFF = 25
 
-    DELTA = 0.50  # one of two treatments in Dal Bo & Frechette AER 2011; values: 0.50, 0.75
-    NUM_MATCHES = 1  # set to high number (e.g., 50) if TIME_LIMIT == True
+    DELTA = 0.75  # one of two treatments in Dal Bo & Frechette AER 2011; values: 0.50, 0.75
+    NUM_MATCHES = 10  # set to high number (e.g., 50) if TIME_LIMIT == True
     MATCH_DURATION = np.random.geometric(
         p = (1 - DELTA),
         size = NUM_MATCHES
@@ -223,7 +223,7 @@ class End(Page):
 
 
 page_sequence = [
-    Introduction,
+    # Introduction,
     Instructions_1,
     Instructions_2,
     Instructions_3,
